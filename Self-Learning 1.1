@@ -1,0 +1,563 @@
+using System;
+
+namespace ConsoleApplication1
+{
+    public static class MyTest
+    {
+        public static void Excercise1() //Reverse the letters of a string
+        {
+            string strRead = Console.ReadLine();
+            char[] chrRead = new char[strRead.Length];
+            strRead.CopyTo(0, chrRead, 0, chrRead.Length);
+            for (int i = chrRead.Length - 1; i >= 0; i--)
+            {
+                Console.Write(chrRead[i]);
+            }
+        }
+
+        public static void Excercise2() //Remove empty symbol
+        {
+            string strA = "a b c d e f g h i";
+            char chrA = ' ';
+            string[] strB = new string[strA.Length];
+            strB = strA.Split(chrA);
+            Console.WriteLine("strA : {0}", strA);
+            Console.Write("strB :");
+            for (int i = 0; i < strB.Length; i++)
+            {
+                Console.Write(strB[i]);
+            }
+
+            //Example
+            /*
+            textBox2.Text = "";
+            CharEnumerator CEnumerator = textBox1.Text.GetEnumerator();
+            while (CEnumerator.MoveNext())
+            {
+                byte[] array = new byte[1];
+                array = System.Text.Encoding.ASCII.GetBytes(CEnumerator.Current.ToString());
+                int asciicode = (short)(array[0]);
+                if (asciicode != 32)
+                {
+                    textBox2.Text += CEnumerator.Current.ToString();
+                }
+            }*/
+        }
+
+        public static void MyTest1()    //Show the different between Value Type and Reference Type
+        {
+            //Value Type Examples Start
+            int a = 2;
+            string b = Convert.ToString(a);
+            string c = b;
+            Console.WriteLine("a is {0}, b is {1}, c is {2}", a, b, c); // Value Type Results
+            b = "5";
+            Console.WriteLine("a is {0}, b is {1}, c is {2}", a, b, c); //Value Type Results
+
+            //Reference Type Examples Start
+            C value_1 = new C();
+            C value_2 = value_1;
+            Console.WriteLine("value_1's Value: {0}, Ref: {1}", value_1.Value, value_1.Ref);    //Reference Type Value
+            Console.WriteLine("value_2's Value: {0}, Ref: {1}", value_2.Value, value_2.Ref);    //Reference Type Value
+            Console.WriteLine("value_1's Value Type: {0}, Ref Type: {1}", value_1.Value.GetType().IsValueType, value_1.Ref.GetType().IsValueType);  //Reference Type Value
+            Console.WriteLine("value_2's Value Type: {0}, Ref Type: {1}", value_2.Value.GetType().IsValueType, value_2.Ref.GetType().IsValueType);  //Reference Type Value
+            value_1.Value = 5;
+            value_1.Ref = "test add";
+            Console.WriteLine("value_1's Value: {0}, Ref: {1}", value_1.Value, value_1.Ref);    //Reference Type Results
+            Console.WriteLine("value_2's Value: {0}, Ref: {1}", value_2.Value, value_2.Ref);    //Reference Type Results
+            Console.WriteLine("value_1's Value: {0}, Ref: {1}, {2}", value_1.Value.GetType().IsValueType, value_1.Ref.GetType().IsValueType, value_1.Ref);  //Reference Type Results
+            Console.WriteLine("value)2's Value: {0}, Ref: {1}, {2}", value_2.Value.GetType().IsValueType, value_2.Ref.GetType().IsValueType, value_2.Ref);  //Reference Type Results
+        }
+
+        public static void Mytest2()    //String methods Examples
+        {
+            //Remove letter from String
+            string strA = "You are amazing!";
+            string strB = strA.Remove(3);
+            string strC = strA.Remove(3, 2);
+            Console.WriteLine("strA : {0}", strA);
+            Console.WriteLine("strB [Remove(3)] : {0}", strB);    //Remove Result
+            Console.WriteLine("strC [Remove(3,2)] : {0}", strC);    //Remove Result
+
+            //Choice letters from String
+            string strD = strA.Substring(4);
+            Console.WriteLine("strD [Substring(4)] : {0}", strD);
+
+            //Split the String
+            char[] charA = { 'o', 'a' };
+            string[] strE = strA.Split(charA);  //Split Result
+            for (int i = 0; i < strE.Length; i++)
+            {
+                Console.WriteLine("strE[{0}] [Split] : {1}", i, strE[i]);
+            }
+
+            //Insert letters in String
+            string strF = strA.Insert(4, "and I ");
+            Console.WriteLine("steF [Insert] : {0}", strF); //Insert Result
+
+            //Compare the ranking of first letter of the string
+            int ranking = string.Compare(strA, strD);
+            int ranking2 = strA.CompareTo(strD);
+            Console.WriteLine("strA vs strD [Compare] : {0}", ranking); //Compare Result
+            Console.WriteLine("strA vs strD [Com[areTo] : {0}", ranking2);  //CompareTo Result
+
+            //Check if strD equal to strA
+            bool trueOrFalse;
+            bool trueOrFalse2;
+            trueOrFalse = string.Equals(strA, strD);
+            trueOrFalse2 = strA.Equals(strD);
+            Console.WriteLine("strA vs strD way_1 [Equals] : {0}", trueOrFalse);    //Equals Result 1
+            Console.WriteLine("strA vs strD way_2 [Equals] : {0}", trueOrFalse2);   //Equals Result 2
+
+            //Format the String
+            string strH = string.Format("{0} &&& {1}", strA, strF);
+            string strI = string.Format("{0:F}", DateTime.Now);
+            Console.WriteLine("strH [Format] : {0}", strH); //Format Result
+            Console.WriteLine("strI [Format] : {0}", strI); //Format Result
+
+            //Copy the String
+            string strJ;
+            char[] strK = new char[strA.Length - 1];
+            strJ = string.Copy(strA.Substring(4, 3));
+            strA.CopyTo(4, strK, 0, 3);
+            Console.WriteLine("strJ [Copy] : {0}", strJ);   //Copy Result
+            for (int i = 0; i < strK.Length; i++)    //CopyTo Result
+            {
+                Console.WriteLine("strK[{0}] [CopyTo] : {1}", i, strK[i]);
+            }
+
+            //Replace letter
+            string strL = strA.Replace("are", "are so");
+            Console.WriteLine("strL [Replace] : {0}", strL);    //Replace Result
+        }
+
+        public static void Mytest3()    //If...else... & Switch & While & Do...While
+        {
+            //Use If...else check is it a number
+            Console.Write("Enter a number to check is it a number : ");
+            string numberRead = Console.ReadLine();
+            bool trueOrFalse;
+            long longA;
+            double doubtA;
+            if (trueOrFalse = long.TryParse(numberRead, out longA))
+            {
+                Console.WriteLine("It's number.");
+            }
+            else if (trueOrFalse = double.TryParse(numberRead, out doubtA))
+            {
+                Console.WriteLine("It's number.");
+            }
+            else
+            {
+                Console.WriteLine("It's not number.");
+            }
+
+            //Use switch to test it's odd or even
+            Console.Write("Enter a number to test it's odd or even : ");
+            numberRead = Console.ReadLine();
+            switch (long.TryParse(numberRead, out longA) ? int.Parse(numberRead) % 2 : 99)
+            {
+                case 0: Console.WriteLine("It's even number."); break;
+                case 99: Console.WriteLine("It's not a natural number."); break;
+                default: Console.WriteLine("It's odd number."); break;
+            }
+
+            //Use while to plus
+            Console.Write("Enter a natural number to retorted plus: ");
+            numberRead = Console.ReadLine();
+            trueOrFalse = long.TryParse(numberRead, out longA);
+            if (trueOrFalse)
+            {
+                int i = 1, y = 0;
+                while (i <= longA)
+                {
+                    y += i;
+                    Console.WriteLine("{0} : {1}", i, y);
+                    i++;
+                }
+            }
+            else
+            {
+                Console.WriteLine("It's not a natural number.");
+            }
+
+            //Use do...while to reverse a number
+            Console.Write("Enter a natural number to reverse : ");
+            numberRead = Console.ReadLine();
+            trueOrFalse = long.TryParse(numberRead, out longA);
+            if (trueOrFalse)
+            {
+                char[] charA = new char[numberRead.Length];
+                numberRead.CopyTo(0, charA, 0, numberRead.Length);  //Change String to char[] method_1  ****************IMPORTANT********************
+                int i = numberRead.Length - 1;
+                do
+                {
+                    Console.Write("{0}", charA[i]);
+                    i--;
+                } while (i >= 0);
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("It's not a natural number.");
+            }
+
+            //Use Foreach to retorted plus
+            Console.Write("Enter a number to retorted plus : ");
+            numberRead = Console.ReadLine();
+            char[] charArr1 = numberRead.ToCharArray(); //Change String to char[] method_2  ****************IMPORTANT********************
+                                                        //List1.AddRange(charArr1);    //Add Array_1's value to Array_2's value    ****************IMPORTANT********************
+            int z = 1, y2 = 0;
+            foreach (char c in charArr1)
+            {
+                int y = Convert.ToInt32(c) - 48; //Change Char to Int ****************IMPORTANT********************
+                y2 += y;
+                Console.WriteLine("{0} : {1}", z, y2);
+                z++;
+            }
+        }
+
+        public static void Mytest4()    //Construction
+        {
+            ConstructionExample_1 myClass = new ConstructionExample_1();
+            Console.WriteLine("With Construction : z : {0} ; y : {1} ; x : {2}", myClass.z, myClass.y, myClass.x);
+            ConstructionExample_2 myClass2 = new ConstructionExample_2();
+            Console.WriteLine("Without Construction : z : {0} ; y : {1} ; x : {2}", myClass2.z, myClass2.y, myClass2.x);
+        }
+
+        public static void Mytest5()    //Call Dispose and Destruction
+        {
+            //Way 1 Call Dispose
+            DestructionExample_1 DestructionObj = new DestructionExample_1();
+            Console.WriteLine("Dispose Way1 Start, Method 2 Call");
+            DestructionObj.Close();    //Dispose Method 2 Called
+            Console.WriteLine("Dispose Way1 Ended\n");
+            Console.WriteLine("Dispose Way1 Start, Method 1 Call");
+            DestructionObj.Dispose();   // Dispose Method 1 Called
+            Console.WriteLine("Dispose Way1 Ended\n");
+
+            //Way 2 Call Dispose
+            using (DestructionExample_1 DestructionObj2 = new DestructionExample_1())
+            {
+                Console.WriteLine("Dispose Way 2 Start");
+            }
+        }
+
+        public static void Mytest6()    //Inheritance : Virtual & Override & New
+        {
+            Father father = new Father();
+            Child child = new Child();
+            Father fatherB = (Father)child;
+            father.X = 1;
+            father.Y = 2;
+            child.X = 10;
+            child.Y = 20;
+            fatherB.X = 100;
+            fatherB.Y = 200;
+            Console.WriteLine("father's vistual Add (z = x + b) : {0}, X : {1}, Y : {2}", father.Add(), father.X, father.Y);
+            Console.WriteLine("child's override Add (z = x * b) : {0}, X : {1}, Y : {2}", child.Add(), child.X, child.Y);
+            Console.WriteLine("fatherB's fatherVar(childVar) override Add (z = x * b) : {0}, X : {1}, Y : {2}", fatherB.Add(), fatherB.X, fatherB.Y);
+            /*father.X = 3;
+            father.Y = 4;
+            child.X = 30;
+            child.Y = 40;
+            fatherB.X = 300;
+            fatherB.Y = 400;*/
+            Console.WriteLine("father's AddB (z = x + b) : {0}, X : {1}, Y : {2}", father.AddB(), father.X, father.Y);
+            Console.WriteLine("child's new AddB (z = x * b) : {0}, X : {1}, Y : {2}", child.AddB(), child.X, child.Y);
+            Console.WriteLine("fatherB's fatherVar(childVar) new AddB (z = x + b) : {0}, X : {1}, Y : {2}", fatherB.AddB(), fatherB.X, fatherB.Y);
+        }
+
+        public static void Mytest7()    //Interface
+        {
+            IFather Ichild = new IChild();
+            Ichild.Imethod();
+            IFatherB IchildB = new IChild();
+            IchildB.Imethod();
+        }
+    }
+
+    public static class Question
+    {
+        public static void Q1() //CharEnumrator Example
+        {
+            string title = "A Tale of Two Cities";
+            CharEnumerator chEnum = title.GetEnumerator();
+            int ctr = 1;
+            string outputLine1 = null;
+            string outputLine2 = null;
+            string outputLine3 = null;
+
+            while (chEnum.MoveNext())
+            {
+                outputLine1 += ctr < 10 || ctr % 10 != 0 ? "  " : (ctr / 10) + " ";
+                outputLine2 += (ctr % 10) + " ";
+                outputLine3 += chEnum.Current + " ";
+                ctr++;
+            }
+
+            Console.WriteLine("The length of the string is {0} characters:",
+                              title.Length);
+            Console.WriteLine(outputLine1);
+            Console.WriteLine(outputLine2);
+            Console.WriteLine(outputLine3);
+        }
+
+        public static void Q2()
+        {
+            C test1 = new C();
+            test1.Value = 999;
+            test1.Ref = "name";
+            Console.WriteLine(test1.Value + " " + test1.Ref);
+            test1.Value = 111;
+            test1.Ref = "HI9YOU";
+            Console.Write(test1.Value + " " + test1.Ref + "\n");
+        }
+    }
+
+    public class C
+    {
+        public string Ref = "test";
+        public int Value { get; set; }
+    }
+
+    public class ConstructionExample_1 //Construction Example
+    {
+        public int x = 3, y = 5, z = 0;
+
+        public ConstructionExample_1()  //Construction Method's name must be named as same as Class's name & it can't be void
+        {
+            z = x + y;
+        }
+    }
+
+    public class ConstructionExample_2  //No Construction Example
+    {
+        public int x = 3, y = 5, z = 0;
+
+        public void ConstructionExample()
+        {
+            z = x + y;
+        }
+    }
+
+    public class DestructionExample_1 : IDisposable //Destruction and Dispose Example
+    {
+        ~DestructionExample_1() //Destruction
+        {
+            Console.WriteLine("Destruction Called");
+        }
+
+        public void Close() //Dispose Method 2
+        {
+            Console.WriteLine("Dispose Method 2 Called");
+            this.Dispose();
+        }
+
+        public void Dispose()   //Dispose Method 1
+        {
+            Console.WriteLine("Dispose Method 1 Called");
+            //GC.SuppressFinalize(this);    //Destruction wou't be called
+        }
+    }
+
+    public class DisposeExample : IDisposable    //***************IMPORTANT***************
+    {
+        //A good Dispose Example that
+        //Destruction won't be called after Dispose had been called successfully
+
+        private bool disposed = false;  //For checking had Dispose(bool) been run before.
+
+        ~DisposeExample() //Call Dispose(bool) which is called by System(GC - Destrcution())
+        {
+            this.Dispose(false);
+        }
+
+        public void Close() //Call Dispose(bool) which is called by User
+        {
+            this.Dispose(true);
+        }
+
+        public void Dispose()   //Call Dispose(bool) which is called by User
+        {
+            Dispose(true);
+        }
+
+        public void Dispose(bool disposing)
+        {
+            if (!this.disposed)  //Checks had it been called. disposed is false at first but it will be changed to true afther if()... run
+            {
+                try
+                {
+                    if (disposing)  //Checks it's called by User or System(GC - Destrcution())
+                    {
+                        Console.WriteLine("Dispose Called by Used - Managed resourse released");
+                    }
+
+                    Console.WriteLine("Dispose Called - Unmanaged resourse released");
+
+                    disposed = true;    //Turn disposed to true. Then Dispose(bool) won't load [Dispose(bool)]if() again
+                    GC.SuppressFinalize(this);  //Destruction wou't be called
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Congratulation!!!! You find a bug!!!! :)");
+                }
+                finally
+                {
+                    Console.WriteLine("finally called");
+                }
+            }
+        }
+    }
+
+    public class Father
+    {
+        private int x, y, z;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Z { get; set; }
+
+        public virtual int Add()
+        {
+            Z = X + Y;
+            return Z;
+        }
+
+        public virtual int AddB()
+        {
+            Z = X + Y;
+            return Z;
+        }
+    }   //Father Class
+
+    public class Child : Father
+    {
+        private int x, y, z;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Z { get; set; }
+
+        public override int Add()
+        {
+            Z = X * Y;
+            return Z;
+        }
+
+        public new int AddB()
+        {
+            Z = X * Y;
+            return Z;
+        }
+    }   //Child Class inherts frome Father Class
+
+    public interface IFather
+    {
+        int Ix { get; set; }    //Property
+        void Imethod(); //Method
+    }   //Interface Class
+
+    public interface IFatherB
+    {
+        void Imethod();
+    }
+
+    public class IChild : IFather, IFatherB
+    {
+        string str = "";
+        private int x, y,a;
+        public int X
+        {
+            get { return x; }
+            set{ x = value; }
+        }
+        public int Y
+        {
+            get { return y; }
+            set { y = value; }
+        }
+        void IFather.Imethod()
+        {
+            Console.Write("You need to enter two natural numbers. \nEnter the frist natural number : ");
+            str = Console.ReadLine();
+            while (!(int.TryParse(str,out a)))
+            {
+                Console.Write("You didn't enter a natural number. Enter again : ");
+                str = Console.ReadLine();
+            }
+            X = int.Parse(str);
+            str = "";
+            Console.Write("Enter the second natural number : ");
+            str = Console.ReadLine();
+            while (!(int.TryParse(str, out a)))
+            {
+                Console.Write("You didn't enter a natural number. Enter again : ");
+                str = Console.ReadLine();
+            }
+            Y = int.Parse(str);
+            Console.WriteLine("Answer is {0} + {1} = {2}", x, y, Ix=x+y);
+        }
+        void IFatherB.Imethod()
+        {
+            Console.WriteLine("This line is under IFtherB's method");
+        }
+        public int Ix  //Interface property mush be public ***************IMPORTANT**************
+        {
+            get;
+            set;
+        }
+    }
+
+    /*public static class ReferenceAndValue
+    {
+        public static void Demonstration()
+        {
+            stamp Stamp_1 = new stamp { Name = "Premiere", Age = 25 };
+            stamp Stamp_2 = new stamp { Name = "Again", Age = 47 };
+            int age = Stamp_1.Age;
+            Stamp_1.Age = 22;
+            stamp guru = Stamp_2;
+            Stamp_2.Name = "Again Amend";
+            Console.WriteLine("Stamp_1's age:{0}, type:{1}", Stamp_1.Age, Stamp_1.Age.GetType().IsValueType);
+            Console.WriteLine("age's value:{0}, type:{1}", age, age.GetType().IsValueType);
+            Console.WriteLine("Stamp_2's name:{0}, type:{1}", Stamp_2.Name, Stamp_2.Name.GetType().IsValueType);
+            Console.WriteLine("guru's name:{0}, type:{1}", guru.Name, guru.Name.GetType().IsValueType);
+        }
+    }*/
+
+    public class stamp
+    {
+        public int Age { get; set; }
+        public string Name { get; set; }
+    }
+
+    public static class Welcome
+    {
+        public static int welcome()
+        {
+            int x = 1;
+            string str = "";
+            Console.Write("Welcome to my code. \nEnter a number to pick a code to run. \nEnter :");
+            str = Console.ReadLine();
+            while(!(int.TryParse(str, out x)))
+            {
+                Console.Write("You didn't enter a natural number. Enter again :");
+                str = Console.ReadLine();
+            }
+            Console.WriteLine("Thanks for your pick. Welcome to the World.");
+            return x;
+        }
+    }
+
+    internal class Program
+    {
+        public static void Main()
+        {
+            //Welcome.welcome();
+            //Question.Q2();
+            MyTest.Mytest7();
+            //ReferenceAndValue.Demonstration();
+            Console.ReadLine();
+        }
+    }
+}
