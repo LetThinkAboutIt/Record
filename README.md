@@ -49,13 +49,20 @@
 #
 #		6. Constructor - Create an initiation of a class. If we want to make a special initiation of a class, we use construction to do it.
 #										 It allows us to initiate a class when we declare it as a new instance. The construction has a same name as the class
-#									 	it looks like this : public Class MyClass 
+#									 	 it looks like this : public Class MyClass 
 #																				 {
 #																					 	public MyClass() { Your special initiation code }
 #																				 }
 #
 #		7. Destruction - Release the resource that we want to but we couldn't control when to do it. 
-#										 It's determined by a system which is called garbage collector.
+#										 The time is determined by a system which is called garbage collector. 
+#                    Destructor looks like custructor but it has a '~'
+#                    It looks like this : public Class MyClass
+#                                         {
+#                                             ~MyClass()
+#                                             { xxx }
+#                                         }
 #
+
 # Written at 21/1/218
 #Copyright © GU
