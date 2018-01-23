@@ -1,0 +1,49 @@
+using System;
+
+namespace Sealed_Example
+{
+    //This is a simple which basically shows how to use sealed.
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BaseClassA baseClass = new BaseClassA();
+            SealedClass sealClass = new SealedClass();
+            SealedMethod sealMethod = new SealedMethod();
+            baseClass.Method();
+            sealClass.Method();
+            sealMethod.Method();
+            Console.ReadLine();
+        }
+    }
+
+    public class BaseClassA //This BaseClassA is built for showing sealed method In SealedMethod Class.
+    {
+        public virtual void Method()    //It's the method which's built for inheritance to show how to sealed a virtual method.
+        {
+            Console.WriteLine("It's Base Class");
+        }
+    }
+
+    public sealed class SealedClass //This SealedClass is built for showing sealed class.
+    {
+        public void Method()
+        {
+            Console.WriteLine("It's Sealed Class.");
+        }
+    }
+
+    public class SealedMethod : BaseClassA    //This class is built for showing sealed method.
+    {
+        public sealed override void Method()    //It's a sealed method that inherite from BaseClassA virtual method.
+        {
+            Console.WriteLine("It's Sealed Method.");
+            //base.Method();
+        }
+    }
+
+    /*public class SealedMethodB : SealedClass  //If you untext this class, a error will appear, because a class can't inherite from a sealed class.
+    {
+    }*/
+}
