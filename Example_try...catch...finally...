@@ -1,0 +1,186 @@
+using System;
+
+namespace Exception
+{
+    //Using several ways to test exception
+
+    class Program
+    {
+        static void Main(string[] args) //Call the testing methods.
+        {
+            ExceptionClassA.ExA();
+            ExceptionClassB.ExB();
+            ExceptionClassC.welcome();
+            ExceptionClassD.ExD();
+            ExceptionClassE.ExE();
+            Console.ReadLine();
+        }
+
+        public static class ExceptionClassA //The basic example of exception(try...catch...)
+        {
+            public static void ExA()    //declear a null object to a int type variable.
+            {
+                try
+                {
+                    object obj = null;
+                    int i = (int)obj;
+                }
+                catch(System.Exception ex)
+                {
+                    Console.WriteLine("Error was caught.\n" + ex + "\n");
+                }
+            } 
+        }
+
+        public static class ExceptionClassB //Use checked to catch overflow exception of int type(try...catch...)
+        {
+            public static void ExB()
+            {
+                try
+                {
+                    checked
+                    {
+                        int a = int.MaxValue;
+                        int b = a + 1;
+                    }
+                }
+                catch(OverflowException ex)
+                {
+                    Console.WriteLine("Over Flow Exception was caught.\n" + ex + "\n");
+                }
+            }
+        }
+
+        public static class ExceptionClassC //Use throw to throw out a dividebyzero exception(try...catch...)
+        {
+            public static void welcome()
+            {
+                string f, g;
+                Console.Write("Enter a number to be divided : ");
+                f = Console.ReadLine();
+                Console.Write("Enter a number to divide : ");
+                g = Console.ReadLine();
+                ExceptionClassC.ExC(f, g);
+            }
+
+            public static void ExC(string a, string b)
+            {
+                try
+                {
+                    double c = double.Parse(a);
+                    double d = double.Parse(b);
+                    if (d == 0)
+                    {
+                        throw new DivideByZeroException();
+                    }
+                    double h = c / d;
+                    Console.WriteLine("The answer is : {0}", h);
+                }
+                catch(DivideByZeroException ex)
+                {
+                    Console.WriteLine("Can't not divide by zero.\n" + ex + "\n");
+                }
+            }
+        }
+
+        public static class ExceptionClassD  //Use an int type calculation(c = a + b) which shows Format Exception(try...catch...)
+        {
+            public static void ExD()    //Exception method
+            {
+                bool tf = false;    //Variable of checking format is right or wrong. True is right : False is wrong.
+                do //When tf is false, keeps runing try...catch...
+                {
+                    try
+                    {
+                        string a, b;    //Variables that for two natural numbers
+                        Console.Write("Please enter two natural numbers.\nA : ");
+                        a = Console.ReadLine();
+                        Console.Write("B : ");
+                        b = Console.ReadLine();
+                        calculation(a, b);  //"try" will catch the exception even we enter string type but not int type.
+                        tf = true;
+                    }
+                    catch (FormatException ex)
+                    {
+                        Console.WriteLine("You didn't enter a natural number. Please try again.");
+                        tf = false;
+                    }
+                } while (!tf);
+
+            }
+
+            public static void calculation(string a, string b)
+            {
+                int c = int.Parse(a);   //Here will generate a format exception if the string a can't be parse to int type.
+                int d = int.Parse(b);   //Here will generate a format exception if the string b can't be parse to int type.
+                Console.WriteLine("{0} + {1} = {2}", c, d, c + d);
+            }
+        }
+
+        public static class ExceptionClassE //Show how to use finally... with try...catch...
+        {
+            public static void ExE()    //We will play a interesting game in this code @*v*@
+            {
+                bool tf = false;    //Right or wrong answer
+                string b;   //Variable that for player enter agin or not
+                int i = 0, y = 1;  //i is counter of how many time you have played this game, y is for random.
+                Random rnd = new Random();
+                do
+                {
+                    try
+                    {
+                        i++;
+                        string a;
+                        Console.WriteLine("It's the {0} time I want to play a game. I created a pasword in this code. Now, try to enter a right pasword @*v*@",i);
+                        Console.Write("Enter a pasword.\nA : ");
+                        a = Console.ReadLine();
+                        if (a != "pasword")
+                        {
+                            throw new FormatException();
+                            tf = false;
+                        }
+                        else
+                        {
+                            tf = true;
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        Console.WriteLine("Owwwwww. Wrong Try again @*v*@");
+                        switch (y = rnd.Next(1,5))
+                        {
+                            case 1:
+                                Console.WriteLine("Come on. I thought you can do this. @*v*@");
+                                break;
+                            case 2:
+                                Console.WriteLine("I will give you one more chance. @*v*@");
+                                break;
+                            case 3:
+                                Console.WriteLine("Sigh. I have nothing to say now.");
+                                break;
+                            case 4:
+                                Console.WriteLine("Do you need a hint? emm. Ok ok, the hint is.... \n\n\n\nI'm not going to tell you @*v*@");
+                                break;
+                        }
+                    }
+                    finally //The code will run to here no matter there is a exception or not.
+                    {
+                        Console.WriteLine("And I won't let you leave until you enter a right pasword @*v*@\n");
+                    }
+                } while (!tf);
+                Console.Write("OK, you enter a right pasword. And I will let you leave, now you can leave. Don't do it again @*v*@ or if you dare to challenge me, enter \"again\" to play one more game. @*v*@\nEnter : ");
+                b = Console.ReadLine();
+                if (b == "again")
+                {
+                    Console.WriteLine("I see. You are dare to challenge me. Nice, very nice. But I'm not interested in it so bye bye @*v*@");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("OK. I know it's hard for you to do that. I can't understand it so don't feel stressful. See you in the future @*v*@");
+                    Console.ReadLine();
+                }
+            }
+        }
+    }
+}
